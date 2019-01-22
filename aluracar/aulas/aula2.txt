@@ -1,0 +1,105 @@
+Criar modelo(interface) de alguma coisa ex: carro
+    cria um arquivo "carro.ts" dentro da pasta modelos em src/
+        
+        export interface Carro{
+            nome: string,
+            preco: number
+        }
+
+------------------------------------------------------------------------------------------------
+
+Fazer uma requisição a uma API
+
+Adiciona o http client no constructor
+    
+    constructor( private _http: HttpClient ) {}
+    
+Não pode esquecer do import
+
+    import { HttpClient } from '@angular/common/http';
+
+E do import no array de "imports" do app.module.ts
+
+Agora o codigo para importar
+
+    public carros: Carro[]; //Declara um array de carros
+
+    constructor( private _http: HttpClient ) {
+        this._http
+            .get<Carro[]>('http://localhost:8080/api/carro/listaTodosx') //faz um get na url e define que o retorno vai ser um array de carro(<Carro[]>)
+            .subscribe(
+                (carros) => { //Retorna carros
+                    this.carros = carros; //atribui o retorno carros no array carros
+                }
+            );
+    }
+
+HTML para listar os carros
+
+    <ion-list>
+        <ion-item *ngFor="let carro of carros">
+            <h2>{{carro.nome}}</h2>
+            <p>R${{carro.preco}}</p>
+        </ion-item>
+    </ion-list>
+
+------------------------------------------------------------------------------------------------
+
+Criando loader enquanto a requisição é feita
+
+Adicionar o loadingController no constructor
+
+    private _loadingCtrl: LoadingController
+
+Importar o LoadingController
+
+    import { LoadingController } from 'ionic-angular';
+
+Dentro do constructor 
+
+    let loading = this._loadingCtrl.create({ //Cria o loader e salva como uma variavel
+        content: 'Aguarde o carregamento dos carros...' // Mensagem de conteúdo do loader
+    });
+
+    loading.present(); // Adicionado para mostrar o loader
+
+    loading.dismiss(); // Adicionado para fechar o loader
+
+------------------------------------------------------------------------------------------------------
+
+Criando alerta de falha na consulta da API
+
+Adicionar AlertController no constructor
+
+    private _alertCtrl: AlertController
+
+No subscribe adicionar o error
+
+    .subscribe(
+        (carros) => {
+            this.carros = carros;
+            loading.dismiss();
+        },
+        (err: HttpErrorResponse) => {
+            loading.dismiss(); //Retira o loader
+
+            this._alertCtrl.create({ // Cria o alerta
+                title: 'Falha na Conexão', //Titulo do alerta (Ex <h1>)
+                subTitle: 'Não foi possível carregar a lista de carros. Tente novamente mais tarde', //Subtitulo do alerta (Ex <p>)
+                buttons: [ //Botões do alerta
+                    { text: 'Ok'} //Texto do botão
+                ]
+            }).present(); //Mostra o alerta
+        }
+    );
+
+------------------------------------------------------------------------------------------------------
+
+Para isolar o acesso a api's, basta criar um serviço, se a api é usada em varios lugares
+
+    ionic g provider nome.service
+
+Para gerar uma nova pagina basta rodar o comando
+
+    ionic g page nomepagina //O destino é src/pages/nomepagina
+
