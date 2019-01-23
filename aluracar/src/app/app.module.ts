@@ -1,4 +1,3 @@
-import { EscolhaPage } from './../pages/escolha/escolha';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -13,8 +12,7 @@ import { CarrosServiceProvider } from '../providers/carros-service/carros-servic
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    EscolhaPage
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -24,8 +22,7 @@ import { CarrosServiceProvider } from '../providers/carros-service/carros-servic
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    EscolhaPage
+    HomePage
   ],
   providers: [
     StatusBar,

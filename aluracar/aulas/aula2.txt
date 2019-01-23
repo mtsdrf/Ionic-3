@@ -103,3 +103,41 @@ Para gerar uma nova pagina basta rodar o comando
 
     ionic g page nomepagina //O destino é src/pages/nomepagina
 
+------------------------------------------------------------------------------------------------------
+
+Navegação entre paginas
+    Add a pagina no declarations e no entryComponents do app.module
+
+    No click ou no evento deve add o codigo
+
+        //Para navegar e enviar um ou mais parametros 
+        this.navCtrl.push(EscolhaPage, {
+            carroSelecionado: carro
+        });
+
+        //Para somente navegar
+        this.navCtrl.push(EscolhaPage);
+
+------------------------------------------------------------------------------------------------------
+
+Variaveis de template 
+
+    <ion-toggle 
+        #toggle //Definimos o nome da variavel com cerquilha (#nome)
+        (ionChange)="atualizaTotal(toggle.checked)" //Na função passamos o nome da variável.propriedade 
+    > 
+    </ion-toggle>
+
+------------------------------------------------------------------------------------------------------
+
+Acesar uma variavel privada
+
+    Devemos criar o metodo get
+
+        get precoTotal() {
+            return this._precoTotal;
+        }
+
+    No template basta 
+
+        {{precoTotal}}
