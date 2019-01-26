@@ -141,3 +141,36 @@ Acesar uma variavel privada
     No template basta 
 
         {{precoTotal}}
+
+------------------------------------------------------------------------------------------------------
+
+Pegando dados do form
+
+    <form (ngSubmit)="agenda()" #formulario="ngForm"> //usamos o binding ngSubmit para enviar para a função agenda no CadastroPage
+                                                      //Como o botão de submit esta fora do form definimos uma variavel de template
+                                                      //#formulario e atribuimos o ngForm a ela para podermos dar o submit no form
+                                            
+    <ion-input [(ngModel)]="nome" name="nome"></ion-input> //Declaramos o ngModel e atribuimos a qual atributo do CadastroPage ela está
+                                                           //ligada 
+
+    <button ion-fab (click)="formulario.ngSubmit.emit()"> //No bind do evento click acessamos o ngSubmit da variavel formulario e emitimos os inputs
+
+    //No CadastroPage criamos os atributos que serão recebidos do form
+        public nome: string = '';
+        public endereco: string = '';
+        public email: string = '';
+        public data: string = new Date().toISOString();
+
+    //E criamos o metodo agenda que é chamado no submit do form
+        agenda(){
+            console.log(this.nome);
+            console.log(this.endereco);
+            console.log(this.email);
+            console.log(this.data);
+        }
+
+------------------------------------------------------------------------------------------------------
+
+
+
+

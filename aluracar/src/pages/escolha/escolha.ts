@@ -1,3 +1,4 @@
+import { CadastroPage } from './../cadastro/cadastro';
 import { Acessorio } from './../../modelos/acessorio';
 import { Carro } from './../../modelos/carro';
 import { Component } from '@angular/core';
@@ -35,6 +36,13 @@ export class EscolhaPage {
 
   get precoTotal() {
     return this._precoTotal;
+  }
+
+  avancaCadastro(){
+    this.navCtrl.push(CadastroPage.name, {
+      carroSelecionado: this.carro,
+      precoTotal: this._precoTotal
+    });
   }
 
 }
