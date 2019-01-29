@@ -171,6 +171,11 @@ Pegando dados do form
 
 ------------------------------------------------------------------------------------------------------
 
+Tranformar string em observable
+Importa o fromPromise no app module
 
+    app.module.ts
+        import 'rxjs/add/observable/fromPromise';
 
-
+    cadastro.ts
+        return Observable.fromPromise(promisse);
