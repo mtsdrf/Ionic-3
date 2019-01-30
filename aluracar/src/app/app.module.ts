@@ -24,8 +24,7 @@ import { AgendamentoDaoProvider } from '../providers/agendamento-dao/agendamento
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListaAgendamentosPage
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -40,8 +39,7 @@ import { AgendamentoDaoProvider } from '../providers/agendamento-dao/agendamento
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListaAgendamentosPage
+    HomePage
   ],
   providers: [
     StatusBar,

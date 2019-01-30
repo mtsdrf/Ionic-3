@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule, List } from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 import { ListaAgendamentosPage } from './lista-agendamentos';
 
 @NgModule({
