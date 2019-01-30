@@ -1,16 +1,16 @@
+import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
 import { ListaAgendamentosPage } from '../pages/lista-agendamentos/lista-agendamentos';
 @Component({
   selector: 'myapp',
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
   
   @ViewChild(Nav) public nav: Nav;
 
