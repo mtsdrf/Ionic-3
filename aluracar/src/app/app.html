@@ -1,6 +1,15 @@
 <ion-split-pane>
     <ion-menu [content]="conteudo">
         <ion-content>
+            <ion-item id="cabecalho-menu" class="cabecalho-menu">
+                <div>
+                    <ion-avatar item-start>
+                        <img src="assets/img/avatar-profile.jpg">
+                    </ion-avatar>
+                </div>
+                <h2>Mateus Ferreira</h2>
+                <p>mreisf.geral@gmail.com</p>
+            </ion-item>
             <ion-list>
                 <button ion-item menuClose 
                     *ngFor="let pagina of paginas"
