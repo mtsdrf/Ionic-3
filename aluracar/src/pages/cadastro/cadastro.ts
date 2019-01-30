@@ -84,7 +84,7 @@ export class CadastroPage {
           throw new Error('Agendamento existente!');
         }
 
-        return this._agendamentosService.agenda(agendamento)
+        return this._agendamentosService.agenda(agendamento);
     })    
     .mergeMap( //É executado depois do metodo agenda(OBS: importar o mergemap no app module)
       (valor) => {
