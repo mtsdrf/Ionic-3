@@ -1,3 +1,4 @@
+import { UsuariosServiceProvider } from './../providers/usuarios-service/usuarios-service';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
@@ -20,15 +21,23 @@ export class MyApp {
     { titulo: 'Perfil', componente: PerfilPage.name, icone: 'person'},
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+  constructor(
+      platform: Platform,
+      statusBar: StatusBar,
+      splashScreen: SplashScreen,
+      private _usuariosService: UsuariosServiceProvider) {
+        platform.ready().then(() => {
+          statusBar.styleDefault();
+          splashScreen.hide();
+        });
   }
 
   irParaPagina(componente){
     this.nav.push(componente);
+  }
+
+  get usuarioLogado(){
+    return this._usuariosService.obtemUsuarioLogado();
   }
 }
 

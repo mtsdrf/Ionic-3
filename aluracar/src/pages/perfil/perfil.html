@@ -9,7 +9,7 @@
   <ion-item no-lines>
     <div class="avatar-wrapper">
       <ion-avatar>
-        <img src="assets/img/avatar-profile.jpg">
+        <img src="assets/img/avatar-padrao.jpg">
       </ion-avatar>
       <button class="btn-tirar-foto" ion-button icon-only round>
         <ion-icon name="camera"></ion-icon>
@@ -20,22 +20,22 @@
   <ion-card>
     <ion-item>
       <ion-icon name="contact" item-left></ion-icon>
-      <p>Mateus Ferreira</p>
+      <p>{{usuarioLogado.nome}}</p>
     </ion-item>
 
     <ion-item>
       <ion-icon name="calendar" item-left></ion-icon>
-      <p>19/04/1999</p>
+      <p>{{usuarioLogado.dataNascimento}}</p>
     </ion-item>
 
     <ion-item>
       <ion-icon name="at" item-left></ion-icon>
-      <p>mreis.geral@gmail.com</p>
+      <p>{{usuarioLogado.email}}</p>
     </ion-item>
 
     <ion-item>
       <ion-icon name="call" item-left></ion-icon>
-      <p>016 996025191</p>
+      <p>{{usuarioLogado.telefone}}</p>
     </ion-item>
   </ion-card>
 </ion-content>
