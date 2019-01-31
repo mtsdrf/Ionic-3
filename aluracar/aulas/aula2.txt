@@ -179,3 +179,11 @@ Importa o fromPromise no app module
 
     cadastro.ts
         return Observable.fromPromise(promisse);
+
+------------------------------------------------------------------------------------------------------
+
+Instalando plugins do cordova
+    (vibration) ionic cordova plugin add cordova-plugin-vibration@2.1.6
+depois
+    npm istall --save @ionic-native/vibration
+NÃO ESQUECER DE ADICIONAR O PLUGIN NA LISTA DE PROVIDERS DO APP MODULE
