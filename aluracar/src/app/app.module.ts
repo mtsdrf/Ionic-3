@@ -22,6 +22,8 @@ import 'rxjs/add/observable/of';
 import { AgendamentoDaoProvider } from '../providers/agendamento-dao/agendamento-dao';
 import { UsuariosServiceProvider } from '../providers/usuarios-service/usuarios-service';
 
+
+
 @NgModule({
   declarations: [
     MyApp,

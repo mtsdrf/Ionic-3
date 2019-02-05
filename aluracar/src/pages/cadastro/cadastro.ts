@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Alert, AlertController } from 'ionic-angular';
 import { Agendamento } from '../../modelos/agendamento';
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-cadastro',
@@ -39,7 +41,6 @@ export class CadastroPage {
 
   // Criação do metodo agenda
   agenda(){
-
     if (!this.nome || !this.endereco || !this.email) {
       this._alerta.create({
         title: 'Preenchimento Obrigatório',
