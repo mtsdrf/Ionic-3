@@ -11,6 +11,6 @@ import { PerfilPage } from './perfil';
   ],
   exports: [
     PerfilPage
-  ],
+  ]
 })
 export class PerfilPageModule {}

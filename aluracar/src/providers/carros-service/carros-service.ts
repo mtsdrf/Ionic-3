@@ -1,15 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 import { Carro } from '../../modelos/carro';
 
 @Injectable()
 export class CarrosServiceProvider {
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) {
+  }
 
-  lista(){
-    return this._http.get<Carro[]>('http://localhost:8080/api/carro/listaTodos');
+  lista() {
+    return this._http.get<Carro[]>('http://192.168.43.168:8080/api/carro/listaTodos');
   }
 
 }

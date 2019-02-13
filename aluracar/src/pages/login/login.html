@@ -7,16 +7,17 @@
     </div>
   </div>
   <div padding>
-    <form (ngSubmit)="efetuaLogin()" >
+    <form (ngSubmit)="efetuaLogin()">
       <ion-item>
-        <ion-label stacked>Email</ion-label>
-        <ion-input [(ngModel)]="email" name="email" type="text"></ion-input> 
+          <ion-label stacked>Email</ion-label>
+          <ion-input [(ngModel)]="email" name="email" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>Senha</ion-label>
-        <ion-input [(ngModel)]="senha" name="senha" type="password"></ion-input> 
+          <ion-label stacked>Senha</ion-label>
+          <ion-input [(ngModel)]="senha" name="senha" type="password"></ion-input>
       </ion-item>
+
       <button ion-button block type="submit" class="login">ENTRAR</button>
     </form>
   </div>

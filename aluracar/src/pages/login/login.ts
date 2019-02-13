@@ -1,8 +1,9 @@
-import { Usuario } from './../../modelos/usuario';
-import { UsuariosServiceProvider } from './../../providers/usuarios-service/usuarios-service';
-import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { HomePage } from '../home/home';
+import { UsuariosServiceProvider } from '../../providers/usuarios-service/usuarios-service';
+import { Usuario } from '../../modelos/usuario';
+
 
 @IonicPage()
 @Component({
@@ -11,14 +12,13 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 })
 export class LoginPage {
 
-  email: string = "joao@alura.com.br";
-  senha: string = "alura123";
+  email: string = 'joao@alura.com.br';
+  senha: string = 'alura123';
 
-  constructor(
-    public navCtrl: NavController,
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private _usuariosService: UsuariosServiceProvider,
-    private _alertCtrl: AlertController) {
+    private _alertCtrl: AlertController,
+    private _usuariosService: UsuariosServiceProvider) {
   }
 
   efetuaLogin() {
@@ -26,23 +26,24 @@ export class LoginPage {
     console.log(this.senha);
 
     this._usuariosService
-      .efetuaLogin(this.email, this.senha)
-      .subscribe(
-        (usuario: Usuario) => {
-          console.log(usuario);
-          this.navCtrl.setRoot(HomePage);
-        },
-        () => {
-          this._alertCtrl.create({
-            title: 'Falha no login',
-            subTitle: 'Email ou senha incorretos! Verifique!',
-            buttons: [
-              { text: 'Ok' }
-            ]
-          }).present();
-        }
-      )
+        .efetuaLogin(this.email, this.senha)
+        .subscribe(
+          (usuario: Usuario) => {
+            console.log(usuario);
+            this.navCtrl.setRoot(HomePage);
+          },
+          () => {
+            this._alertCtrl.create({
+              title: 'Falha no login',
+              subTitle: 'Email ou senha incorretos! Verifique!',
+              buttons: [
+                { text: 'Ok' }
+              ]
+            }).present();
+          }
+        )
 
+    
   }
 
 }

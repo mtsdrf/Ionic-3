@@ -1,8 +1,8 @@
-import { AgendamentosServiceProvider } from './../../providers/agendamentos-service/agendamentos-service';
-import { Agendamento } from './../../modelos/agendamento';
-import { AgendamentoDaoProvider } from './../../providers/agendamento-dao/agendamento-dao';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AgendamentoDaoProvider } from '../../providers/agendamento-dao/agendamento-dao';
+import { Agendamento } from '../../modelos/agendamento';
+import { AgendamentosServiceProvider } from '../../providers/agendamentos-service/agendamentos-service';
 
 @IonicPage()
 @Component({
@@ -11,32 +11,44 @@ import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ion
 })
 export class ListaAgendamentosPage {
   agendamentos: Agendamento[];
+  private _alerta;
 
-  private alerta: Alert;
-
-  constructor(
-    public navCtrl: NavController,
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private _agendamentoDao: AgendamentoDaoProvider,
-    private _alerta: AlertController,
-    private _agendamentosService: AgendamentosServiceProvider) {
+    private _alertCtrl: AlertController,
+    private _agendamentosService: AgendamentosServiceProvider,
+    private _agendamentoDao: AgendamentoDaoProvider) {
   }
 
   ionViewDidLoad() {
-    this._agendamentoDao.listaTodos().subscribe(
-      (agendamentos: Agendamento[]) => {
-        this.agendamentos = agendamentos;
-      } 
-    )
+    this._agendamentoDao.listaTodos()
+        .subscribe(
+          (agendamentos: Agendamento[]) => {
+            this.agendamentos = agendamentos;
+          }
+        )
   }
 
-  reenvia(agendamento: Agendamento){
+  ionViewDidEnter() {
+    setTimeout(() => this.atualizaAgendamentos(), 5000);
+  }
 
-    this.alerta = this._alerta.create({ // Atribui o _alerta criado ao atributo alerta
-      title: "Aviso!", //Titulo do botão
+  atualizaAgendamentos() {
+    this.agendamentos
+        .filter((agendamento: Agendamento) => agendamento.confirmado)
+        .forEach((agendamento: Agendamento) => {
+          agendamento.visualizado = true;
+
+          this._agendamentoDao.salva(agendamento);
+        });
+  }
+
+  reenvia(agendamento: Agendamento) {
+    this._alerta = this._alertCtrl.create({
+      title: 'Aviso',
       buttons: [
-        {
-          text: "OK", //Texto do botão
+        { 
+          text: 'ok'
         }
       ]
     });
@@ -44,23 +56,24 @@ export class ListaAgendamentosPage {
     let mensagem = '';
 
     this._agendamentosService.agenda(agendamento)
-      .mergeMap( //É executado depois do metodo agenda(OBS: importar o mergemap no app module)
-        (valor) => {
+        .mergeMap((valor) => {
+
           let observable = this._agendamentoDao.salva(agendamento);
           if (valor instanceof Error) {
             throw valor;
           }
-
+          
           return observable;
-        }
-      )
-      .finally(
-        () => this.alerta.setSubTitle(mensagem).present() //Define o subtitulo do alerta e mostra o alerta
-      )
-      .subscribe(
-        () => mensagem = 'O agendamento foi reenviado!', //Define o subtitulo do alerta e mostra o alerta
-        (err: Error) => mensagem = err.message //Define o subtitulo do alerta e mostra o alerta
-      );
+        })
+        .finally(
+          () => {
+            this._alerta.setSubTitle(mensagem);
+            this._alerta.present();
+          }
+        )
+        .subscribe(
+          () => mensagem = 'Agendamento reenviado!',
+          (err: Error) => mensagem = err.message
+        );
   }
-
 }

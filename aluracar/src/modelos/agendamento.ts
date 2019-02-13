@@ -1,4 +1,4 @@
-export interface Agendamento{
+export interface Agendamento {
     nomeCliente: string,
     enderecoCliente: string,
     emailCliente: string,
@@ -6,5 +6,6 @@ export interface Agendamento{
     precoTotal: number,
     confirmado: boolean,
     enviado: boolean,
-    data: string
+    data: string,
+    visualizado: boolean
 }

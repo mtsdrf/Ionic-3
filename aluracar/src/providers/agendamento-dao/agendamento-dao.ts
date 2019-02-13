@@ -1,32 +1,38 @@
-import { Agendamento } from './../../modelos/agendamento';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { Agendamento } from '../../modelos/agendamento';
 
 import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AgendamentoDaoProvider {
 
-  constructor(private _storage: Storage) {}  
+  constructor(private _storage: Storage) {
+  }
 
-  private _geraChave(agendamento: Agendamento){
+  private _geraChave(agendamento: Agendamento) {
     return agendamento.emailCliente + agendamento.data.substr(0, 10);
   }
 
-  salva(agendamento) {
+  salva(agendamento: Agendamento) {
     let chave = this._geraChave(agendamento);
-
     let promise = this._storage.set(chave, agendamento);
 
     return Observable.fromPromise(promise);
   }
 
-  ehDuplicado(agendamento: Agendamento){
+  recupera(agendamentoId) {
+    let promise = this._storage
+                      .get(agendamentoId);
+
+    return Observable.fromPromise(promise);
+  }
+
+  ehDuplicado(agendamento: Agendamento) {
     let chave = this._geraChave(agendamento);
     let promise = this._storage
-      .get(chave)
-      .then(dado => dado ? true : false );
+                      .get(chave)
+                      .then(dado => dado ? true : false);
 
     return Observable.fromPromise(promise);
   }
@@ -41,4 +47,5 @@ export class AgendamentoDaoProvider {
 
     return Observable.fromPromise(promise);
   }
+
 }

@@ -10,7 +10,7 @@ import { ListaAgendamentosPage } from './lista-agendamentos';
     IonicPageModule.forChild(ListaAgendamentosPage),
   ],
   exports: [
-    ListaAgendamentosPage,
-  ],
+    ListaAgendamentosPage
+  ]
 })
 export class ListaAgendamentosPageModule {}
